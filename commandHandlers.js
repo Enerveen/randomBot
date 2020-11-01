@@ -11,7 +11,7 @@ function getDog(bot, ctx) {
   fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=dog&amount=1')
     .then((data) => data.json())
     .then((data) => {
-      ctx.reply(data[0].text);
+      ctx.reply(data.text);
     });
   fetch('https://api.thedogapi.com/v1/images/search', {
     headers: { 'x-api-key': process.env.DOGAPI_KEY },
@@ -27,7 +27,7 @@ function getCat(bot, ctx) {
   fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1')
     .then((data) => data.json())
     .then((data) => {
-      ctx.reply(data[0].text);
+      ctx.reply(data.text);
     });
   fetch('https://api.thecatapi.com/v1/images/search', {
     headers: { 'x-api-key': process.env.CATAPI_KEY },
