@@ -56,19 +56,47 @@ function getActivity(bot, ctx) {
     });
 }
 
-function getNEPerson(bot, ctx) {
+function getKanyeQuote(bot, ctx) {
   log(bot, ctx);
-  ctx.replyWithPhoto('https://thiscatdoesnotexist.com/');
+  fetch('https://api.kanye.rest/')
+    .then((data) => data.json())
+    .then((data) => {
+      ctx.reply(data.quote);
+    });
 }
 
-function getNECat(bot, ctx) {
+function getAdvice(bot, ctx) {
   log(bot, ctx);
-  ctx.replyWithPhoto('https://thiscatdoesnotexist.com/');
+  fetch('https://api.adviceslip.com/advice')
+    .then((data) => data.json())
+    .then((data) => {
+      ctx.reply(data.slip.advice);
+    });
 }
 
-function getNEArt(bot, ctx) {
+function getFood(bot, ctx) {
   log(bot, ctx);
-  ctx.replyWithPhoto('https://thisartworkdoesnotexist.com/');
+  fetch('https://foodish-api.herokuapp.com/api/')
+    .then((data) => data.json())
+    .then((data) => {
+      ctx.replyWithPhoto(data.image);
+    });
+}
+
+function getNEPic(url) {
+  const cash = [];
+
+  function generatePerson() {
+    return fetch(url).then((res) => res.buffer());
+  }
+
+  setInterval(async () => {
+    if (cash.length >= 10) return;
+    const person = await generatePerson();
+    cash.push(person);
+  }, 5000);
+
+  return cash.length ? { source: cash.pop() } : { url };
 }
 
 module.exports = {
@@ -76,8 +104,9 @@ module.exports = {
   getDog,
   getFox,
   getActivity,
-  getNEPerson,
-  getNECat,
-  getNEArt,
+  getKanyeQuote,
+  getAdvice,
+  getFood,
+  getNEPic,
   roll,
 };
