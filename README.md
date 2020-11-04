@@ -1,6 +1,5 @@
-# Noxxcuzz Telegram Bot
-
-Pretty simple bot for Telegram, which i mainly use in group chat with friends just for fun. It's developed with Node.js and telegraf.js, the framework for easier interacting with Telegram API.
+# TemereBot 
+Telegram bot that helps you to get different sorts of random content across the internet. 
 
 ## Technologies
 
