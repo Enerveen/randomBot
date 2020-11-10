@@ -83,6 +83,24 @@ function getFood(bot, ctx) {
     });
 }
 
+function showMenu(bot, ctx) {
+  log(bot, ctx);
+  ctx.reply(`Choose category or type /help to get the full list of commands`, {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: 'Animals', callback_data: 'animals' },
+          { text: 'Advices', callback_data: 'advices' },
+        ],
+        [
+          { text: 'Artificially Generated', callback_data: 'artgen' },
+          { text: 'Other', callback_data: 'other' },
+        ],
+      ],
+    },
+  });
+}
+
 function getNEPic(url) {
   const cash = [];
 
@@ -109,4 +127,5 @@ module.exports = {
   getFood,
   getNEPic,
   roll,
+  showMenu,
 };
