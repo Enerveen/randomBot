@@ -4,13 +4,18 @@ function msgHandling(bot, ctx) {
     case undefined:
       break;
     case 'Жыве Беларусь!':
-      ctx.reply('Жыве вечна!');
-      ctx.reply('🇧🇾');
-      ctx.reply('🇧🇾');
       ctx.reply('🇧🇾');
       break;
+    case 'Who is the best girl?':
+      ctx.replyWithPhoto(
+        'https://res.cloudinary.com/dnxmbqza4/image/upload/v1605375116/storage/asuka-langley-soryu-2679_cijkxi.jpg'
+      );
+      break;
     default:
-      ctx.reply(`I'am so sorry, ${ctx.from.first_name}, but I don't understand what are you talking about :<`);
+      ctx.reply(`
+I'am so sorry, ${ctx.from.first_name}, but I don't understand what are you talking about :<
+Type /help to see the full list of commands or /menu to open interactive menu
+`);
   }
 
   if (ctx.message.voice) {

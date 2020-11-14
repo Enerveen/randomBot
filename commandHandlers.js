@@ -6,35 +6,33 @@ function roll(bot, ctx) {
   ctx.reply(Math.ceil(Math.random() * 100));
 }
 
-function getDog(bot, ctx) {
+async function getDog(bot, ctx) {
   log(bot, ctx);
-  fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=dog&amount=1')
-    .then((data) => data.json())
-    .then((data) => {
-      ctx.reply(data.text);
-    });
+  const fact = await fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=dog&amount=1').then((data) =>
+    data.json()
+  );
+
   fetch('https://api.thedogapi.com/v1/images/search', {
     headers: { 'x-api-key': process.env.DOGAPI_KEY },
   })
     .then((data) => data.json())
     .then((data) => {
-      ctx.replyWithPhoto(data[0].url);
+      ctx.replyWithPhoto(data[0].url, { caption: fact.text });
     });
 }
 
-function getCat(bot, ctx) {
+async function getCat(bot, ctx) {
   log(bot, ctx);
-  fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1')
-    .then((data) => data.json())
-    .then((data) => {
-      ctx.reply(data.text);
-    });
+  const fact = await fetch('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1').then((data) =>
+    data.json()
+  );
+
   fetch('https://api.thecatapi.com/v1/images/search', {
     headers: { 'x-api-key': process.env.CATAPI_KEY },
   })
     .then((data) => data.json())
     .then((data) => {
-      ctx.replyWithPhoto(data[0].url);
+      ctx.replyWithPhoto(data[0].url, { caption: fact.text });
     });
 }
 
@@ -101,6 +99,27 @@ function showMenu(bot, ctx) {
   });
 }
 
+function showInfo(bot, ctx) {
+  log(bot, ctx);
+  ctx.replyWithHTML(
+    `
+You are using <b>Temere Contentus bot</b>
+Current version: <b>1.0.0</b>
+
+This is an open source project, so you can find code <a href='https://github.com/Enerveen/randomBot'>here</a>
+
+If you want to collaborate, suggest an API with random content or just talk a bit – feel free to <a href='tg://user?id=439154730'>text me</a>
+
+<b>Another ways to find me:</>
+<b><a href ='https://www.linkedin.com/in/yahorauu/'>LinkedIn</a></b>
+<b><a href ='https://github.com/Enerveen'>GitHub</a></b>
+
+<i>Hope you are having a great time using this bot</i>
+`,
+    { disable_web_page_preview: true }
+  );
+}
+
 function getNEPic(url) {
   const cash = [];
 
@@ -128,4 +147,5 @@ module.exports = {
   getNEPic,
   roll,
   showMenu,
+  showInfo,
 };
