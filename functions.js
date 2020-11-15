@@ -1,25 +1,39 @@
 function msgHandling(bot, ctx) {
   log(bot, ctx);
-  switch (ctx.message.text) {
-    case undefined:
-      break;
-    case 'Жыве Беларусь!':
-      ctx.reply('🇧🇾');
-      break;
-    case 'Who is the best girl?':
-      ctx.replyWithPhoto(
-        'https://res.cloudinary.com/dnxmbqza4/image/upload/v1605375116/storage/asuka-langley-soryu-2679_cijkxi.jpg'
-      );
-      break;
-    default:
-      ctx.reply(`
+  if (ctx.message.text) {
+    switch (ctx.message.text) {
+      case undefined:
+        break;
+
+      //Easter eggs
+      case 'Жыве Беларусь!':
+        ctx.reply('🇧🇾');
+        break;
+      case 'Who is the best girl?':
+        ctx.replyWithPhoto(
+          'https://res.cloudinary.com/dnxmbqza4/image/upload/v1605375116/storage/asuka-langley-soryu-2679_cijkxi.jpg'
+        );
+        break;
+      case 'Stupid machine':
+        ctx.reply('Just as you are');
+        break;
+
+      // Default text message reply
+
+      default:
+        ctx.reply(`
 I'am so sorry, ${ctx.from.first_name}, but I don't understand what are you talking about :<
 Type /help to see the full list of commands or /menu to open interactive menu
 `);
-  }
-
-  if (ctx.message.voice) {
-    bot.telegram.getFileLink(ctx.message.voice.file_id).then((res) => ctx.reply(`Voice message download link: ${res}`));
+    }
+  } else if (ctx.message.sticker) {
+    ctx.replyWithSticker(ctx.message.sticker.file_id);
+  } else if (ctx.message.video) {
+    ctx.reply('Hmm, very interesting...');
+  } else if (ctx.message.photo) {
+    ctx.reply('Nice pic!');
+  } else if (ctx.message.voice) {
+    ctx.reply('Wish I had ears');
   }
 }
 
