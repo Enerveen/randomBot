@@ -1,4 +1,5 @@
 const { log } = require('./functions');
+const { mainKeyboard } = require('./keyboards');
 const fetch = require('node-fetch');
 
 function roll(bot, ctx) {
@@ -85,16 +86,7 @@ function showMenu(bot, ctx) {
   log(bot, ctx);
   ctx.reply(`Choose category or type /help to get the full list of commands`, {
     reply_markup: {
-      inline_keyboard: [
-        [
-          { text: 'Animals', callback_data: 'animals' },
-          { text: 'Advices', callback_data: 'advices' },
-        ],
-        [
-          { text: 'Artificially Generated', callback_data: 'artgen' },
-          { text: 'Other', callback_data: 'other' },
-        ],
-      ],
+      inline_keyboard: mainKeyboard,
     },
   });
 }
@@ -104,7 +96,7 @@ function showInfo(bot, ctx) {
   ctx.replyWithHTML(
     `
 You are using <b>Temere Contentus bot</b>
-Current version: <b>1.0.0</b>
+Current version: <b>1.0.1</b>
 
 This is an open source project, so you can find code <a href='https://github.com/Enerveen/randomBot'>here</a>
 

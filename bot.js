@@ -1,7 +1,7 @@
 //imports and declaring
 
 require('dotenv').config();
-const fetch = require('node-fetch');
+const { mainKeyboard, animalsKeyboard, advicesKeyboard, artgenKeyboard, otherKeyboard } = require('./keyboards');
 const {
   getCat,
   getDog,
@@ -27,16 +27,7 @@ bot.start((ctx) =>
     `Hey there, ${ctx.from.first_name}\nUse the menu below to find things you like or type /help to get the full list of commands`,
     {
       reply_markup: {
-        inline_keyboard: [
-          [
-            { text: 'Animals', callback_data: 'animals' },
-            { text: 'Advices', callback_data: 'advices' },
-          ],
-          [
-            { text: 'Artificially Generated', callback_data: 'artgen' },
-            { text: 'Other', callback_data: 'other' },
-          ],
-        ],
+        inline_keyboard: mainKeyboard,
       },
     }
   )
@@ -77,16 +68,7 @@ bot.action('animals', (ctx) => {
   ctx.deleteMessage();
   ctx.reply('Which animals do you prefer?', {
     reply_markup: {
-      inline_keyboard: [
-        [
-          { text: '😺 Cats', callback_data: 'cats' },
-          { text: '🐶 Dogs', callback_data: 'dogs' },
-        ],
-        [
-          { text: '🦊 Foxes', callback_data: 'foxes' },
-          { text: '◀️ Back', callback_data: 'back' },
-        ],
-      ],
+      inline_keyboard: animalsKeyboard,
     },
   });
 });
@@ -112,16 +94,7 @@ bot.action('advices', (ctx) => {
   ctx.deleteMessage();
   ctx.reply('What sort of advice you need?', {
     reply_markup: {
-      inline_keyboard: [
-        [
-          { text: '☝️ Just a usual advice', callback_data: 'advice' },
-          { text: '🥱 Some activity', callback_data: 'bored' },
-        ],
-        [
-          { text: '🧔🏿 Kanye West quote', callback_data: 'kanye' },
-          { text: '◀️ Back', callback_data: 'back' },
-        ],
-      ],
+      inline_keyboard: advicesKeyboard,
     },
   });
 });
@@ -147,16 +120,7 @@ bot.action('artgen', (ctx) => {
   ctx.deleteMessage();
   ctx.reply('What kind of artificially generated content are you intrested in?', {
     reply_markup: {
-      inline_keyboard: [
-        [
-          { text: '👨 People', callback_data: 'smbd' },
-          { text: '😼 Cats', callback_data: 'smct' },
-        ],
-        [
-          { text: '🖼 Art', callback_data: 'smrt' },
-          { text: '◀️ Back', callback_data: 'back' },
-        ],
-      ],
+      inline_keyboard: artgenKeyboard,
     },
   });
 });
@@ -191,13 +155,7 @@ bot.action('other', (ctx) => {
   ctx.deleteMessage();
   ctx.reply('Are you enjoying some of that?', {
     reply_markup: {
-      inline_keyboard: [
-        [
-          { text: '🔢 Numbers', callback_data: 'num' },
-          { text: '🍕 Food', callback_data: 'food' },
-        ],
-        [{ text: '◀️ Back', callback_data: 'back' }],
-      ],
+      inline_keyboard: otherKeyboard,
     },
   });
 });
